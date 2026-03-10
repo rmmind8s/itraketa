@@ -463,6 +463,37 @@ html, body {
   color: var(--text-secondary);
 }
 
+.modal-text p + p {
+  margin-top: 0.85rem;
+}
+
+.modal-footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.modal-services-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  padding: 0;
+}
+
+.modal-link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border);
+  transition: text-decoration-color 0.2s;
+}
+
+.modal-link:hover {
+  text-decoration-color: var(--text-secondary);
+}
+
 /* ── THEME TOGGLE ── */
 .theme-toggle {
   background: none;
@@ -642,9 +673,24 @@ html, body {
       </svg>
     </button>
     <p class="modal-title">Apie mane</p>
-    <p class="modal-text">
-      Čia bus tekstas apie mane.
-    </p>
+    <div class="modal-text">
+      <p>Esu IT specialistas, turintis patirties programavimo, bankinių sistemų vystymo ir IT pagalbos srityse. Per savo karjerą dirbau su finansų, energetikos, gamybos ir kitų sektorių įmonėmis.</p>
+      <p>Dabar savo žinias ir patirtį skiriu tam, kad padėčiau žmonėms bei smulkiajam verslui išnaudoti technologijas ir dirbtinį intelektą paprastai bei praktiškai.</p>
+      <div class="modal-footer-row">
+        <a href="https://www.facebook.com/m.ruslys" rel="nofollow noopener" target="_blank" class="footer-name">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+          Mindaugas
+        </a>
+        <button class="footer-name modal-services-btn" onclick="toggleAboutModal(); toggleModal();">
+          Paslaugos
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 3l5 5-5 5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
