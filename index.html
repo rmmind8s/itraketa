@@ -585,9 +585,23 @@ html, body {
   --accent-dim: rgba(0, 0, 0, 0.04);
 }
 
-
 [data-theme="light"] .modal-overlay {
   background: rgba(0,0,0,0.4);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --border: #e2e2e2;
+    --text-primary: #111111;
+    --text-secondary: #444444;
+    --text-muted: #777777;
+    --accent-dim: rgba(0, 0, 0, 0.04);
+  }
+  :root:not([data-theme="dark"]) .modal-overlay {
+    background: rgba(0,0,0,0.4);
+  }
 }
 
 /* ── ANIMATIONS ── */
@@ -681,7 +695,7 @@ html, body {
           </a>
         </li>
         <li>
-          <a class="app-btn" href="https://m.me/itrocks247" aria-label="Messenger">
+          <a class="app-btn" href="https://m.me/itspecialistas" aria-label="Messenger">
             <svg viewBox="0 0 24 24" fill="#0084FF">
               <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.455 5.516 3.732 7.22V22l3.405-1.869c.909.252 1.871.387 2.863.387 5.523 0 10-4.145 10-9.259S17.523 2 12 2zm.988 12.472l-2.547-2.717-4.97 2.717 5.467-5.803 2.61 2.717 4.907-2.717-5.467 5.803z"/>
             </svg>
@@ -828,7 +842,12 @@ html, body {
 // Theme
 const html = document.documentElement;
 const saved = localStorage.getItem('theme');
-if (saved) html.setAttribute('data-theme', saved);
+if (saved) {
+  html.setAttribute('data-theme', saved);
+} else {
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  html.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+}
 
 document.getElementById('themeToggle').addEventListener('click', () => {
   const current = html.getAttribute('data-theme');
