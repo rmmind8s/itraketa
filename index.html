@@ -204,12 +204,68 @@ html, body {
   letter-spacing: 0.04em;
   color: var(--text-primary);
   text-decoration: none;
-  display: block;
   transition: color 0.2s;
 }
 
-.phone-number:hover {
-  color: var(--accent);
+
+.phone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone-number {
+  display: inline;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.copy-btn:hover {
+  color: var(--text-primary);
+}
+
+.copy-btn svg { width: 14px; height: 14px; }
+
+.copy-btn .icon-check { display: none; }
+.copy-btn.copied .icon-copy { display: none; }
+.copy-btn.copied .icon-check { display: block; color: var(--green); }
+.copy-btn.copied { color: var(--green); }
+
+.copy-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 999;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .call-btn {
@@ -522,7 +578,18 @@ html, body {
   <div class="contact-card">
     <div class="phone-section">
       <p class="phone-label">Telefonas</p>
-      <a class="phone-number" href="tel:+37061600055">+370 616 000 55</a>
+      <div class="phone-row">
+        <a class="phone-number" href="tel:+37061600055">+370 616 000 55</a>
+        <button class="copy-btn" id="copyBtn" onclick="copyPhone()" aria-label="Kopijuoti numerį">
+          <svg class="icon-copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="5" width="8" height="9" rx="1.5"/>
+            <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v7A1.5 1.5 0 0 0 3.5 12H5"/>
+          </svg>
+          <svg class="icon-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2.5 8.5l3.5 3.5 7-7"/>
+          </svg>
+        </button>
+      </div>
       <a class="call-btn" href="tel:+37061600055" aria-label="Skambinti">
         <svg viewBox="0 0 24 24" fill="currentColor">
           <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
@@ -573,6 +640,8 @@ html, body {
   </footer>
 
 </div>
+
+<div class="copy-toast" id="copyToast">Nukopijuota!</div>
 
 <!-- About Modal -->
 <div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" onclick="if(event.target===this)toggleAboutModal()">
@@ -677,6 +746,21 @@ trigger.addEventListener('keydown', e => {
 offerTrigger.addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOfferModal(); }
 });
+
+// Copy phone
+let copyTimer;
+function copyPhone() {
+  navigator.clipboard.writeText('+37061600055');
+  const btn = document.getElementById('copyBtn');
+  const toast = document.getElementById('copyToast');
+  btn.classList.add('copied');
+  toast.classList.add('show');
+  clearTimeout(copyTimer);
+  copyTimer = setTimeout(() => {
+    btn.classList.remove('copied');
+    toast.classList.remove('show');
+  }, 2000);
+}
 </script>
 </body>
 </html>
