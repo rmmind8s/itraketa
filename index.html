@@ -207,7 +207,7 @@ html, body {
 
 .copy-btn {
   background: none;
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 6px;
   width: 28px;
   height: 28px;
@@ -222,6 +222,7 @@ html, body {
 
 .copy-btn:hover {
   color: var(--text-primary);
+  border-color: #444;
 }
 
 .copy-btn svg { width: 14px; height: 14px; }
@@ -229,7 +230,7 @@ html, body {
 .copy-btn .icon-check { display: none; }
 .copy-btn.copied .icon-copy { display: none; }
 .copy-btn.copied .icon-check { display: block; color: var(--green); }
-.copy-btn.copied { color: var(--green); }
+.copy-btn.copied { color: var(--green); border-color: var(--green); }
 
 .copy-toast {
   position: fixed;
@@ -497,7 +498,7 @@ html, body {
 /* ── THEME TOGGLE ── */
 .theme-toggle {
   background: none;
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 6px;
   width: 28px;
   height: 28px;
@@ -603,8 +604,8 @@ html, body {
         <a class="phone-number" href="tel:+37061600055">+370 616 000 55</a>
         <button class="copy-btn" id="copyBtn" onclick="copyPhone()" aria-label="Kopijuoti numerį">
           <svg class="icon-copy" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="5" width="8" height="9" rx="1.5"/>
-            <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v7A1.5 1.5 0 0 0 3.5 12H5"/>
+            <rect x="6" y="6" width="7" height="8" rx="1.5"/>
+            <path d="M10 6V4.5A1.5 1.5 0 0 0 8.5 3h-5A1.5 1.5 0 0 0 2 4.5v7A1.5 1.5 0 0 0 3.5 13H6"/>
           </svg>
           <svg class="icon-check" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2.5 8.5l3.5 3.5 7-7"/>
