@@ -1,1 +1,681 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0f0f0f" />
+<title>IT ROCKS — Jūsų technologijos gali daugiau</title>
+<meta name="description" content="Sprendžiu kompiuterių ir programų problemas, paruošiu įrangą, pritaikau sistemas patogiam ir efektyviam darbui, apmokau." />
+<meta property="og:title" content="IT ROCKS — Jūsų technologijos gali daugiau" />
+<meta property="og:description" content="Sprendžiu kompiuterių ir programų problemas, paruošiu įrangą, pritaikau sistemas patogiam ir efektyviam darbui, apmokau." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://itrocks.lt/" />
+<meta property="og:site_name" content="itrocks.lt" />
+<meta property="og:image" content="https://itrocks.lt/itrocks.jpeg">
+<meta name="twitter:card" content="summary_large_image">
 
+<link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/favicon/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #0c0c0c;
+  --surface: #141414;
+  --border: #222222;
+  --text-primary: #f0f0f0;
+  --text-secondary: #888;
+  --text-muted: #555;
+  --accent: #e8f0fe;
+  --accent-dim: rgba(232, 240, 254, 0.08);
+  --green: #34c759;
+  --radius: 12px;
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1.5rem;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
+
+/* ── HEADER ── */
+.header {
+  width: 100%;
+  max-width: 420px;
+  padding: 1.5rem 0 0;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.1s forwards;
+}
+
+.logo-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+
+.logo-text {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.logo-rocket {
+  color: #f5a623;
+  font-style: normal;
+  flex-shrink: 0;
+}
+
+[data-theme="light"] .logo-rocket {
+  color: #e8940a;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1rem 0;
+}
+
+/* ── HERO ── */
+.hero {
+  width: 100%;
+  max-width: 420px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.25s forwards;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: clamp(1.9rem, 6vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.hero-title em {
+  font-style: normal;
+  color: var(--text-secondary);
+}
+
+.hero-desc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 340px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.hero-desc:hover {
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.hero-desc--primary svg {
+  opacity: 1;
+  color: var(--green);
+}
+
+.hero-desc svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ── CONTACT CARD ── */
+.contact-card {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.4s forwards;
+}
+
+.phone-section {
+  padding: 1.75rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.phone-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.phone-number {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s;
+}
+
+.phone-number:hover {
+  color: var(--accent);
+}
+
+.call-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--green);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.call-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.call-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+@keyframes ring {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(-12deg); }
+  20% { transform: rotate(12deg); }
+  30% { transform: rotate(-10deg); }
+  40% { transform: rotate(10deg); }
+  50% { transform: rotate(-6deg); }
+  60% { transform: rotate(6deg); }
+  70% { transform: rotate(-3deg); }
+  80% { transform: rotate(3deg); }
+}
+
+.call-btn:hover svg {
+  animation: ring 0.6s ease;
+}
+
+/* ── MESSAGING ── */
+.messaging-section {
+  padding: 1.25rem 1.5rem;
+}
+
+.messaging-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.app-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.5rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.app-btn:hover {
+  background: var(--accent-dim);
+  border-color: #333;
+  transform: translateY(-2px);
+}
+
+.app-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.app-btn span {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── FOOTER ── */
+.footer {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.55s forwards;
+}
+
+.footer-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-name:hover { color: var(--text-secondary); }
+
+.footer-name svg { width: 14px; height: 14px; }
+
+.footer-domain {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  z-index: 1000;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 380px;
+  width: 100%;
+  position: relative;
+  transform: translateY(12px);
+  transition: transform 0.25s;
+}
+
+.modal-overlay.show .modal-box {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.modal-close:hover { color: var(--text-primary); border-color: #444; }
+.modal-close svg { width: 12px; height: 12px; }
+
+.modal-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.modal-text {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle {
+  background: none;
+  border: none;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--text-muted);
+}
+
+.theme-toggle svg { width: 14px; height: 14px; }
+
+.icon-sun { display: none; }
+.icon-moon { display: block; }
+
+[data-theme="light"] .icon-sun { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
+
+/* ── LIGHT MODE ── */
+[data-theme="light"] {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+  --border: #e2e2e2;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #999999;
+  --accent-dim: rgba(0, 0, 0, 0.04);
+}
+
+
+[data-theme="light"] .modal-overlay {
+  background: rgba(0,0,0,0.4);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-row">
+      <span class="logo-text">
+        <span class="logo-rocket">&gt;</span>
+        itrocks.lt
+      </span>
+      <button class="theme-toggle" id="themeToggle" aria-label="Perjungti temą">
+        <svg class="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="8" cy="8" r="3"/>
+          <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="divider"></div>
+    <p class="hero-label">IT specialistas · Klaipėda</p>
+    <h1 class="hero-title">Jūsų technologijos<br /><em>gali daugiau.</em></h1>
+    <div class="hero-buttons">
+      <p class="hero-desc" onclick="toggleAboutModal()" role="button" tabindex="0" aria-expanded="false" id="aboutTrigger">
+        Apie mane
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="8" cy="5" r="2.5"/>
+          <path d="M2.5 14.5a5.5 5.5 0 0 1 11 0"/>
+        </svg>
+      </p>
+      <p class="hero-desc" onclick="toggleModal()" role="button" tabindex="0" aria-expanded="false" id="descTrigger">
+        Paslaugos
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M3 4.5h10M3 8h10M3 11.5h7"/>
+        </svg>
+      </p>
+      <p class="hero-desc hero-desc--primary" onclick="toggleOfferModal()" role="button" tabindex="0" aria-expanded="false" id="offerTrigger">
+        Pasiūlymai
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 2.5h5.5l6 6-5 5-6-6V2.5z"/>
+          <circle cx="5.5" cy="6" r="1"/>
+        </svg>
+      </p>
+    </div>
+    <div class="divider"></div>
+  </section>
+
+  <!-- Contact Card -->
+  <div class="contact-card">
+    <div class="phone-section">
+      <p class="phone-label">Telefonas</p>
+      <a class="phone-number" href="tel:+37061600055">+370 616 000 55</a>
+      <a class="call-btn" href="tel:+37061600055" aria-label="Skambinti">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
+        </svg>
+        Skambinti dabar
+      </a>
+    </div>
+    <div class="messaging-section">
+      <p class="messaging-label">Žinutės</p>
+      <ul class="apps-grid">
+        <li>
+          <a class="app-btn" href="sms:+37061600055" aria-label="SMS">
+            <svg viewBox="0 0 24 24" fill="#34C759">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+            </svg>
+            <span>SMS</span>
+          </a>
+        </li>
+        <li>
+          <a class="app-btn" href="https://m.me/itrocks247" aria-label="Messenger">
+            <svg viewBox="0 0 24 24" fill="#0084FF">
+              <path d="M12 2C6.477 2 2 6.145 2 11.259c0 2.913 1.455 5.516 3.732 7.22V22l3.405-1.869c.909.252 1.871.387 2.863.387 5.523 0 10-4.145 10-9.259S17.523 2 12 2zm.988 12.472l-2.547-2.717-4.97 2.717 5.467-5.803 2.61 2.717 4.907-2.717-5.467 5.803z"/>
+            </svg>
+            <span>Messenger</span>
+          </a>
+        </li>
+        <li>
+          <a class="app-btn" href="https://wa.me/37061600055" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="#25D366">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            <span>WhatsApp</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a class="footer-name" href="https://www.facebook.com/itrocks247/posts/pfbid0h5c9dngTjrfyoyBAJCnZPEZvbYxnkKkmFLz4nTdGK33qkx2BRijd8BLHPkrbVip5l" rel="nofollow noopener" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+      Mindaugas
+    </a>
+    <span class="footer-domain">itrocks.lt</span>
+  </footer>
+
+</div>
+
+<!-- About Modal -->
+<div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" onclick="if(event.target===this)toggleAboutModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="toggleAboutModal()" aria-label="Uždaryti">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M2 2l12 12M14 2L2 14"/>
+      </svg>
+    </button>
+    <p class="modal-title">Apie mane</p>
+    <p class="modal-text">
+      Čia bus tekstas apie mane.
+    </p>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" onclick="outsideClick(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="toggleModal()" aria-label="Uždaryti">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M2 2l12 12M14 2L2 14"/>
+      </svg>
+    </button>
+    <p class="modal-title">Paslaugos</p>
+    <p class="modal-text">
+      Sprendžiu kompiuterių ir programų problemas, paruošiu įrangą, pritaikau sistemas patogiam ir efektyviam darbui, apmokau.
+    </p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="offerModal" role="dialog" aria-modal="true" onclick="outsideClickOffer(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="toggleOfferModal()" aria-label="Uždaryti">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M2 2l12 12M14 2L2 14"/>
+      </svg>
+    </button>
+    <p class="modal-title">Pasiūlymai</p>
+    <p class="modal-text">
+      Pasiūlymai bus paskelbti netrukus.
+    </p>
+  </div>
+</div>
+
+<script>
+// Theme
+const html = document.documentElement;
+const saved = localStorage.getItem('theme');
+if (saved) html.setAttribute('data-theme', saved);
+
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+// Modals
+const modal = document.getElementById('modal');
+const trigger = document.getElementById('descTrigger');
+const offerModal = document.getElementById('offerModal');
+const offerTrigger = document.getElementById('offerTrigger');
+const aboutModal = document.getElementById('aboutModal');
+const aboutTrigger = document.getElementById('aboutTrigger');
+
+function toggleModal() {
+  const isOpen = modal.classList.toggle('show');
+  trigger.setAttribute('aria-expanded', isOpen);
+}
+
+function toggleOfferModal() {
+  const isOpen = offerModal.classList.toggle('show');
+  offerTrigger.setAttribute('aria-expanded', isOpen);
+}
+
+function toggleAboutModal() {
+  const isOpen = aboutModal.classList.toggle('show');
+  aboutTrigger.setAttribute('aria-expanded', isOpen);
+}
+
+function outsideClick(e) {
+  if (e.target === modal) toggleModal();
+}
+
+function outsideClickOffer(e) {
+  if (e.target === offerModal) toggleOfferModal();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (modal.classList.contains('show')) toggleModal();
+    if (offerModal.classList.contains('show')) toggleOfferModal();
+    if (aboutModal.classList.contains('show')) toggleAboutModal();
+  }
+});
+
+trigger.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleModal(); }
+});
+
+offerTrigger.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOfferModal(); }
+});
+</script>
+</body>
+</html>
